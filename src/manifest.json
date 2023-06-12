@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json.schemastore.org/chrome-manifest",
+  "name": "Chrome extension",
+  "manifest_version": 3,
+  "version": "0.0.0",
+  "background": {
+    "service_worker": "service-worker.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["https://*.land.naver.com/"],
+      "js": ["content-script.js"]
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": ["web-resource.js"],
+      "matches": ["https://*.land.naver.com/*"]
+    }
+  ],
+  "host_permissions": ["https://*.land.naver.com/*"],
+  "permissions": ["scripting"]
+}
