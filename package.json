@@ -1,0 +1,25 @@
+{
+  "name": "extension_template",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/wookikiik/chrome-extension-template.git",
+  "author": "wonmoo <hwmkmh@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "test": "jest --coverage"
+  },
+  "devDependencies": {
+    "@eslint/create-config": "^0.4.4",
+    "@jest/globals": "^29.5.0",
+    "@types/chrome": "^0.0.237",
+    "@typescript-eslint/eslint-plugin": "^5.59.9",
+    "@typescript-eslint/parser": "^5.59.9",
+    "eslint": "^8.42.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "jest": "^29.5.0",
+    "prettier": "^2.8.8",
+    "ts-jest": "^29.1.0",
+    "typescript": "^5.1.3"
+  }
+}

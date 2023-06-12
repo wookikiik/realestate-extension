@@ -1,0 +1,18 @@
+{
+  "editor.defaultFormatter": "rvest.vs-code-prettier-eslint",
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": false,
+  "editor.formatOnType": false,
+  "editor.formatOnSaveMode": "file",
+  "files.autoSave": "onFocusChange",
+  "editor.rulers": [
+    {
+      "color": "#ffc40045",
+      "column": 80
+    },
+    {
+      "color": "#ff00004c",
+      "column": 90
+    }
+  ]
+}
