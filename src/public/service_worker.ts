@@ -1,4 +1,4 @@
-import { MESSAGE_INJECT_RESOURCES, executeScript } from './share'
+import { MESSAGE_INJECT_RESOURCES, executeScript } from '../share'
 
 chrome.webRequest.onCompleted.addListener(
   details => {

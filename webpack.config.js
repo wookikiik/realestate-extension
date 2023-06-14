@@ -10,14 +10,18 @@ const options = {
   devtool: 'cheap-module-source-map',
   mode: process.env.NODE_ENV || 'development',
   entry: {
-    service_worker: fileURLToPath(new URL('./src/service_worker.ts', import.meta.url)),
+    service_worker: fileURLToPath(
+      new URL('./src/public/service_worker.ts', import.meta.url),
+    ),
     content_script: fileURLToPath(
-      new URL('./src/scripts/content_script.ts', import.meta.url),
+      new URL('./src/public/scripts/content_script.ts', import.meta.url),
     ),
-    naverAdapter: fileURLToPath(
-      new URL('./src/scripts/naverAdapter.ts', import.meta.url),
+    naver_adapter: fileURLToPath(
+      new URL('./src/public/scripts/naver_adapter.ts', import.meta.url),
     ),
-    sidepanel: fileURLToPath(new URL('./src/side_panel/sidepanel.ts', import.meta.url)),
+    sidepanel: fileURLToPath(
+      new URL('./src/public/side_panel/sidepanel.ts', import.meta.url),
+    ),
   },
   output: {
     path: fileURLToPath(new URL('./dist', import.meta.url)),
@@ -37,7 +41,10 @@ const options = {
       },
       {
         test: /\.ts$/,
-        use: ['ts-loader'],
+        loader: 'ts-loader',
+        options: {
+          appendTsSuffixTo: [/\.vue$/],
+        },
       },
       {
         test: /\.css$/,
@@ -54,7 +61,7 @@ const options = {
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: 'src/manifest.json',
+          from: 'src/public/manifest.json',
           to: fileURLToPath(new URL('./dist/manifest.json', import.meta.url)),
           transform: content => {
             const manifest = JSON.parse(content.toString())
@@ -66,7 +73,7 @@ const options = {
     }),
     new HtmlWebpackPlugin({
       template: fileURLToPath(
-        new URL('./src/side_panel/sidepanel.html', import.meta.url),
+        new URL('./src/public/side_panel/sidepanel.html', import.meta.url),
       ),
       filename: 'sidepanel.html',
       chunks: ['sidepanel'],

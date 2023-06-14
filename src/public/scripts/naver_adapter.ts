@@ -8,7 +8,7 @@ import {
 
 console.log(`[REUQEST-MESSAGE][${MESSAGE_LOAD_SCRIPT}]`)
 window.postMessage(
-  { type: MESSAGE_LOAD_SCRIPT, script: 'naverAdapter.js' },
+  { type: MESSAGE_LOAD_SCRIPT, script: 'naver_adapter.js' },
   NAVER_MESSAGE_ORIGIN,
 )
 

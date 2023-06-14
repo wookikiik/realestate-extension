@@ -1,14 +1,14 @@
 {
   "name": "extension_template",
   "version": "1.0.0",
-  "main": "index.js",
   "type": "module",
   "repository": "https://github.com/wookikiik/chrome-extension-template.git",
   "author": "wonmoo <hwmkmh@gmail.com>",
   "license": "MIT",
   "scripts": {
     "test": "jest --coverage",
-    "build:dev": "cross-env NODE_ENV=development webpack --config webpack.config.js"
+    "build:dev": "cross-env NODE_ENV=development webpack --config webpack.config.js",
+    "build:prod": "cross-env NODE_ENV=production webpack --config webpack.config.js"
   },
   "devDependencies": {
     "@eslint/create-config": "^0.4.4",
