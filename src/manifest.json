@@ -1,23 +1,26 @@
 {
   "$schema": "https://json.schemastore.org/chrome-manifest",
-  "name": "Chrome extension",
+  "name": "Real Estate Extension",
   "manifest_version": 3,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "background": {
-    "service_worker": "service-worker.js"
+    "service_worker": "service_worker.js"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
   },
   "content_scripts": [
     {
-      "matches": ["https://*.land.naver.com/"],
-      "js": ["content-script.js"]
+      "matches": ["https://*.land.naver.com/*"],
+      "js": ["content_script.js"]
     }
   ],
   "web_accessible_resources": [
     {
-      "resources": ["web-resource.js"],
+      "resources": ["naverAdapter.js"],
       "matches": ["https://*.land.naver.com/*"]
     }
   ],
-  "host_permissions": ["https://*.land.naver.com/*"],
-  "permissions": ["scripting"]
+  "host_permissions": ["https://new.land.naver.com/*"],
+  "permissions": ["webRequest", "sidePanel"]
 }

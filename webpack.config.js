@@ -1,5 +1,6 @@
 import CopyWebpackPlugin from 'copy-webpack-plugin'
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
+import HtmlWebpackPlugin from 'html-webpack-plugin'
 import webpack from 'webpack'
 import { fileURLToPath } from 'node:url'
 
@@ -8,13 +9,14 @@ const options = {
   devtool: 'cheap-module-source-map',
   mode: process.env.NODE_ENV || 'development',
   entry: {
-    'service-worker': fileURLToPath(new URL('./src/service-worker.ts', import.meta.url)),
-    'content-script': fileURLToPath(
-      new URL('./src/scripts/content-script.ts', import.meta.url),
+    service_worker: fileURLToPath(new URL('./src/service_worker.ts', import.meta.url)),
+    content_script: fileURLToPath(
+      new URL('./src/scripts/content_script.ts', import.meta.url),
     ),
-    'web-resource': fileURLToPath(
-      new URL('./src/scripts/web-resource.ts', import.meta.url),
+    naverAdapter: fileURLToPath(
+      new URL('./src/scripts/naverAdapter.ts', import.meta.url),
     ),
+    sidepanel: fileURLToPath(new URL('./src/side_panel/sidepanel.ts', import.meta.url)),
   },
   output: {
     path: fileURLToPath(new URL('./dist', import.meta.url)),
@@ -51,6 +53,14 @@ const options = {
           },
         },
       ],
+    }),
+    new HtmlWebpackPlugin({
+      template: fileURLToPath(
+        new URL('./src/side_panel/sidepanel.html', import.meta.url),
+      ),
+      filename: 'sidepanel.html',
+      chunks: ['sidepanel'],
+      cache: false,
     }),
   ],
 }
