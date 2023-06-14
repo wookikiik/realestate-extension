@@ -3,6 +3,7 @@ import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import webpack from 'webpack'
 import { fileURLToPath } from 'node:url'
+import { VueLoaderPlugin } from 'vue-loader'
 
 /** @type {import('webpack').Configuration} */
 const options = {
@@ -31,8 +32,16 @@ const options = {
   module: {
     rules: [
       {
+        test: /\.vue$/,
+        loader: 'vue-loader',
+      },
+      {
         test: /\.ts$/,
         use: ['ts-loader'],
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },
@@ -41,6 +50,7 @@ const options = {
       verbose: true,
     }),
     new webpack.ProgressPlugin(),
+    new VueLoaderPlugin(),
     new CopyWebpackPlugin({
       patterns: [
         {
