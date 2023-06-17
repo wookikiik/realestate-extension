@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>아파트 시세 정보</title>
+    <style>
+      .card {
+        background-color: #fff;
+        border-radius: 4px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+        margin-bottom: 20px;
+        padding: 20px;
+      }
+
+      .row {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+
+      .complex-row {
+        align-items: center;
+      }
+
+      .header-container {
+        display: flex;
+        flex-direction: column;
+      }
+
+      .header {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .summary {
+        font-size: 14px;
+        color: #666;
+        margin-left: 5px;
+      }
+
+      .copy-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 30px;
+        height: 30px;
+        border-radius: 50%;
+        background-color: #eee;
+        cursor: pointer;
+      }
+
+      .copy-button:hover {
+        background-color: #ddd;
+      }
+
+      .column {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .pyeong {
+        font-size: 18px;
+        font-weight: bold;
+        margin-right: 10px;
+      }
+
+      .price {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .price span {
+        font-size: 18px;
+        margin-right: 5px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <div class="row complex-row">
+        <div class="header-container">
+          <div class="header">제니더클래식</div>
+          <div class="summary">(`1999, 23^)</div>
+        </div>
+        <div class="copy-button">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="16"
+            height="16"
+            fill="currentColor"
+            class="bi bi-clipboard"
+            viewBox="0 0 16 16"
+          >
+            <path
+              d="M11 0H5a2 2 0 0 0-2 2v1H2a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2zm-1 14H9V5h9v12z"
+            />
+          </svg>
+        </div>
+      </div>
+      <div class="row article">
+        <span class="column pyeong">23평</span>
+        <div class="column price">
+          <span>54,000</span>
+          <span>12,000</span>
+        </div>
+      </div>
+      <div class="row article">
+        <span class="pyeong">30평</span>
+        <div class="column price">
+          <span>54,000</span>
+          <span>12,000</span>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

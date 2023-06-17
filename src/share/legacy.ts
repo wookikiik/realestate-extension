@@ -6,3 +6,11 @@ export function getNaverAppToken(): string | undefined {
     return undefined
   }
 }
+
+export function getNaverComplexNo(): string | undefined {
+  const match = window.location.href.match(/\/complexes\/(\d+)/)
+  if (match) {
+    return match[1]
+  }
+  return undefined
+}

@@ -17,10 +17,10 @@
   ],
   "web_accessible_resources": [
     {
-      "resources": ["naverAdapter.js"],
+      "resources": ["naver_adapter.js"],
       "matches": ["https://*.land.naver.com/*"]
     }
   ],
   "host_permissions": ["https://new.land.naver.com/*"],
-  "permissions": ["webRequest", "sidePanel"]
+  "permissions": ["webRequest", "sidePanel", "storage"]
 }

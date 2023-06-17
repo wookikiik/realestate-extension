@@ -56,6 +56,10 @@ const options = {
     new CleanWebpackPlugin({
       verbose: true,
     }),
+    new webpack.DefinePlugin({
+      __VUE_OPTIONS_API__: true,
+      __VUE_PROD_DEVTOOLS__: false,
+    }),
     new webpack.ProgressPlugin(),
     new VueLoaderPlugin(),
     new CopyWebpackPlugin({

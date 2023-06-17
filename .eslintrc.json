@@ -3,7 +3,8 @@
   "env": {
     "browser": true,
     "es2021": true,
-    "node": true
+    "node": true,
+    "webextensions": true
   },
   "globals": {
     "Vue": true,
@@ -23,6 +24,21 @@
   },
   "plugins": ["@typescript-eslint", "prettier", "vue"],
   "rules": {
-    "prettier/prettier": "error"
-  }
+    "prettier/prettier": "error",
+    "@typescript-eslint/no-explicit-any": "off"
+  },
+  "overrides": [
+    {
+      "files": ["service_worker.ts"],
+      "rules": {
+        "no-restricted-globals": [
+          "error",
+          {
+            "name": "window",
+            "message": "Using the window object is restricted in service_worker."
+          }
+        ]
+      }
+    }
+  ]
 }

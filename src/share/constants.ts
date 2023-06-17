@@ -4,7 +4,7 @@ export const SITE_ASIL = 'asil'
 // chrome extension
 export const MESSAGE_INJECT_RESOURCES = 'inject:resources'
 export const MESSAGE_LOAD_TAB = 'load:tab'
-export const MESSAGE_LOAD_SCRIPT = 'load:script'
+export const MESSAGE_LOADED_SCRIPT = 'loaded:script'
 
 // naver
 export const NAVER_MESSAGE_ORIGIN = 'https://new.land.naver.com'
