@@ -7,10 +7,8 @@ export function getNaverAppToken(): string | undefined {
   }
 }
 
-export function getNaverComplexNo(): string | undefined {
-  const match = window.location.href.match(/\/complexes\/(\d+)/)
-  if (match) {
-    return match[1]
-  }
-  return undefined
+export function getNaverComplexNo(href: string): string | undefined {
+  const pattern = /https:\/\/new\.land\.naver\.com\/(.*\/)?complexes(\/\w+)*\/(\d+)/
+  const match = href.match(pattern)
+  return match ? match[3] : undefined
 }

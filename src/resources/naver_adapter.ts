@@ -9,10 +9,10 @@ import {
   NAVER_MESSAGE_SHARE_APP_TOKEN,
   MESSAGE_LOADED_SCRIPT,
   getNaverAppToken,
-  useMessage,
+  useMessageEvent,
 } from '@/share'
 
-const message = useMessage()
+const message = useMessageEvent()
 {
   message.sendPostMessage({ type: MESSAGE_LOADED_SCRIPT, script: 'naver_adapter.js' })
 

@@ -33,3 +33,16 @@ export async function executeScript(tabId: number | undefined, files: string[]) 
 
   console.log('loadResource', result)
 }
+
+export async function waitLoadedTab(): Promise<{ tabId: number }> {
+  return new Promise(resolve => {
+    const callback = (tabId: number, changeInfo: chrome.tabs.TabChangeInfo) => {
+      if (changeInfo.status === 'complete') {
+        resolve({ tabId })
+        chrome.tabs.onUpdated.removeListener(callback)
+      }
+    }
+
+    chrome.tabs.onUpdated.addListener(callback)
+  })
+}

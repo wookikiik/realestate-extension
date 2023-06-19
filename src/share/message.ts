@@ -1,7 +1,6 @@
-import { NAVER_MESSAGE_ORIGIN } from '@/share'
+import { NAVER_MESSAGE_ORIGIN, waitLoadedTab } from '@/share'
 
-export const useMessage = () => {
-  const windowInstance = typeof window !== 'undefined' ? window : undefined
+const useMessage = () => {
   const dispatchs: Map<string, any> = new Map()
 
   const windowMessageListenner = (event: MessageEvent) => {
@@ -27,6 +26,22 @@ export const useMessage = () => {
     }
   }
 
+  return {
+    dispatchs,
+    windowMessageListenner,
+    chromeMessageListenner,
+  }
+}
+
+const {
+  dispatchs, //
+  windowMessageListenner,
+  chromeMessageListenner,
+} = useMessage()
+
+export const useMessageEvent = () => {
+  const windowInstance = typeof window !== 'undefined' ? window : undefined
+
   function openListener() {
     if (windowInstance) {
       windowInstance.addEventListener('message', windowMessageListenner)
@@ -35,18 +50,25 @@ export const useMessage = () => {
     chrome.runtime.onMessage?.addListener(chromeMessageListenner)
   }
 
-  function sendPostMessage(message: any) {
+  function sendPostMessage(message: any): void {
     if (windowInstance) {
       console.log(`[WINDOW][REUQEST-MESSAGE][${message.type}]`)
       windowInstance.postMessage(message, NAVER_MESSAGE_ORIGIN)
     }
   }
 
-  function sendChromeMessage(message: any): Promise<any> {
+  async function sendChromeMessage(message: any): Promise<any> {
     console.log(`[CHROME][REUQEST-MESSAGE][${message.type}]`)
     return chrome.runtime.sendMessage(message)
   }
 
+  async function sendChromdActiveTabMessage(message: any): Promise<any> {
+    const { tabId } = await waitLoadedTab()
+    console.log(`[CHROME-${tabId}][REUQEST-MESSAGE][${message.type}]`)
+    return chrome.tabs.sendMessage(tabId, message)
+  }
+
+  // waitLoadedTab
   function addEventListener(type: string, callback: any) {
     dispatchs.set(type, callback)
   }
@@ -65,6 +87,7 @@ export const useMessage = () => {
   return {
     sendPostMessage,
     sendChromeMessage,
+    sendChromdActiveTabMessage,
     openListener,
     addEventListener,
     removeEventListener,

@@ -4,6 +4,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin'
 import webpack from 'webpack'
 import { fileURLToPath } from 'node:url'
 import { VueLoaderPlugin } from 'vue-loader'
+import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 
 /** @type {import('webpack').Configuration} */
 const options = {
@@ -11,16 +12,19 @@ const options = {
   mode: process.env.NODE_ENV || 'development',
   entry: {
     service_worker: fileURLToPath(
-      new URL('./src/public/service_worker.ts', import.meta.url),
+      new URL('./src/background/service_worker.ts', import.meta.url),
     ),
-    content_script: fileURLToPath(
-      new URL('./src/public/scripts/content_script.ts', import.meta.url),
+    'scripts/naver_content': fileURLToPath(
+      new URL('./src/contents/naver_content.ts', import.meta.url),
     ),
-    naver_adapter: fileURLToPath(
-      new URL('./src/public/scripts/naver_adapter.ts', import.meta.url),
+    'scripts/naver_adapter': fileURLToPath(
+      new URL('./src/resources/naver_adapter.ts', import.meta.url),
     ),
-    sidepanel: fileURLToPath(
-      new URL('./src/public/side_panel/sidepanel.ts', import.meta.url),
+    'scripts/sidepanel': fileURLToPath(
+      new URL('./src/sidepanel/index.ts', import.meta.url),
+    ),
+    'scripts/overview': fileURLToPath(
+      new URL('./src/sidepanel/overview.ts', import.meta.url),
     ),
   },
   output: {
@@ -31,7 +35,7 @@ const options = {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
     },
-    extensions: ['.ts', '.js'],
+    extensions: ['.ts', '.js', '.css'],
   },
   module: {
     rules: [
@@ -48,7 +52,7 @@ const options = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader', 'css-loader'],
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
     ],
   },
@@ -62,10 +66,16 @@ const options = {
     }),
     new webpack.ProgressPlugin(),
     new VueLoaderPlugin(),
+    new MiniCssExtractPlugin({
+      filename: ({ chunk }) => {
+        const name = chunk.name.replace(/^(.*\/)?([^/]+)$/, '$2')
+        return `styles/${name}.css`
+      },
+    }),
     new CopyWebpackPlugin({
       patterns: [
         {
-          from: 'src/public/manifest.json',
+          from: 'src/manifest.json',
           to: fileURLToPath(new URL('./dist/manifest.json', import.meta.url)),
           transform: content => {
             const manifest = JSON.parse(content.toString())
@@ -76,11 +86,15 @@ const options = {
       ],
     }),
     new HtmlWebpackPlugin({
-      template: fileURLToPath(
-        new URL('./src/public/side_panel/sidepanel.html', import.meta.url),
-      ),
+      template: fileURLToPath(new URL('./src/sidepanel/index.html', import.meta.url)),
       filename: 'sidepanel.html',
-      chunks: ['sidepanel'],
+      chunks: ['scripts/sidepanel'],
+      cache: false,
+    }),
+    new HtmlWebpackPlugin({
+      template: fileURLToPath(new URL('./src/sidepanel/overview.html', import.meta.url)),
+      filename: 'overview.html',
+      chunks: ['scripts/overview'],
       cache: false,
     }),
   ],

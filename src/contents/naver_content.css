@@ -1,0 +1,33 @@
+.extension_complex_overview {
+  background-color: #fff;
+  width: 100%;
+  visibility: inherit;
+  text-align: center;
+}
+
+.extension_complex_overview .article_price_wrap {
+  position: relative;
+}
+
+.extension_complex_overview .article_price_wrap .pyeong {
+  display: inline-block;
+  font-size: 13px;
+  width: 30px;
+  text-align: left;
+  margin-right: 10px;
+  letter-spacing: -0.5px;
+  color: #555;
+}
+
+.extension_complex_overview .article_price_wrap .price {
+  display: inline-block;
+  width: 60px;
+  vertical-align: middle;
+  overflow: hidden;
+  font-size: 15px;
+  text-align: center;
+  margin-right: 20px;
+  font-weight: bold;
+  letter-spacing: -0.5px;
+  color: #222;
+}

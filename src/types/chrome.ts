@@ -1,3 +1,15 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-namespace */
+
+declare global {
+  namespace chrome {
+    namespace sidePanel {
+      type OptionPrams = { tabId: number; path?: string; enabled: boolean }
+      function setOptions(params: OptionPrams): Promise<void>
+    }
+  }
+}
+
 export type InjectResourcesMessage = {
   readonly resources: string[]
 }

@@ -1,8 +1,8 @@
 /** @type {import('ts-jest').JestConfigWithTsJest} */
 module.exports = {
-  displayName: 'Unit test chrome extension share scripts',
+  displayName: 'Unit test chrome extension',
   preset: 'ts-jest',
-  collectCoverageFrom: ['<rootDir>/src/share/**/*.ts'],
+  collectCoverageFrom: ['<rootDir>/src/components/**/*.ts'],
   modulePathIgnorePatterns: [],
   testPathIgnorePatterns: [],
   transform: {
